@@ -14,31 +14,49 @@ struct person {
   void (*print_func)(char *name, int age, int j);
 
   // within cpp, can define function and use member in the body of func directly
-  void (*print_func_cpp)(int k)
+  void print_func_cpp(int k)
   {
     printf("name%d %s, age%d %d\n", k+1, name, k+1, age);
-
     return;
   }
 };
+// within cpp no need use typedef to define type
 typedef struct person ps;
 
-class person_class {
-public:
+class Person_class {
+private: // the default access control of class is private
+         // which means it only can be accessed within class
   char *name;
   int age;
-  // define the pointer of function just like the declartion and add a * before func_name
-  void (*print_func)(char *name, int age, int j);
-
+public: // the public of access control means it can be accessed out ot class 
+  // define public function to operate private data
+  // to avoid user wrong operate on private data
+  void setName(char *name)
+  {
+    // by the princple of proximity, name is args rather than private data
+    // use this to appoint to the member of class
+    this->name = name; 
+    return;
+  }
+  int setAge(int age)
+  {
+    if (age < 0 || age >150){
+      this->age = 0;
+      return 0;
+    } else {
+      this->age = a;
+      return 1;
+    }
+  }
   // within cpp, can define function and use member in the body of func directly
-  void (*print_func_cpp)(int k)
+  void print_func_cpp(int k)
   {
     printf("name%d %s, age%d %d\n", k+1, name, k+1, age);
 
     return;
   }
 };
-typedef class person_class ps_class;
+typedef class Person_class ps_class;
 
 int main(int argc, char **argv)
 {
@@ -66,8 +84,8 @@ int main(int argc, char **argv)
   
   // use structure to enstablish associated multiple arrays
   ps persons[] = {
-    {"zhangsan", 17, print_func, print_func_cpp},
-    {"lisi", 18, print_func, print_func_cpp},
+    {"zhangsan", 17, print_func},
+    {"lisi", 18, print_func},
   };
   printf("use structure to enstablish associated multiple arrays\n");
   int j;
@@ -80,7 +98,7 @@ int main(int argc, char **argv)
   printf("add operaton function for the structure within struct\n");
   int k;
   for(k=0; k<2; k++){
-    persons[k].print_func(persons[k].name, persons[k].age, k);
+    persons[k].print_func_cpp(k);
   }
   printf("\n");
 
@@ -97,6 +115,16 @@ int main(int argc, char **argv)
 
   // in cpp enhance the c struct to define func within struct directly
   // use class to replace struct to distinguish cpp enhance for the c struct
+  printf("use class to replace struct to distinguish cpp enhance for the c struct\n");
+  Person_class per[2];
+  per[0].setName("zhangsan");
+  per[0].setAge(17);
+  per[1].setName("lisi");
+  per[1].setAge(18);
+  int n;
+  for(n=0; n<2; n++){
+    per[n].print_func_cpp(n);
+  }
 
   return 0;
 }
