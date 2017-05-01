@@ -7,3 +7,20 @@ git pull origin
 
 :get certain version
 git check out v1 //o1th_oop
+
+
+:create repo on github
+:https://github.com/ -> New repositories(create own repo for version control)
+:only fill in Repository name do not check Initialize this repository with a README
+
+:create a new repository on the command line
+echo "# wds_cpp" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:napoleon1815/wds_cpp.git
+git push -u origin master
+
+:push an existing repository from the command line
+git remote add origin git@github.com:napoleon1815/wds_cpp.git
+git push -u origin master
