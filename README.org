@@ -1,0 +1,9 @@
+reference repo
+:first usage
+git clone "https://github.com/weidongshan/cpp_projects.git"
+
+:update
+git pull origin
+
+:get certain version
+git check out v1 //o1th_oop
