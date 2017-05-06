@@ -55,7 +55,7 @@ public: // the public of access control means it can be accessed out ot class
   // so the two memory address of objects member value is same
   // it will occur destructor free same address twice
   // need copy pointer value manuanly
-  Person(Person &per)
+  Person(const Person &per)
   {
     cout<<"Person(Person &)"<<endl;
     this->name = new char[strlen(per.name) + 1];
